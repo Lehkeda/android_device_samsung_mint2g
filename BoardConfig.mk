@@ -119,7 +119,7 @@ TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
 
 # Host specific
-PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+#PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
 
 #twrp
@@ -133,3 +133,24 @@ TW_FLASH_FROM_STORAGE := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
 TWRP_EVENT_LOGGING := false
+
+# for Gecko to use the correct resolution assets
+# Valid options are: 1.5 | 2 | 2.25
+GAIA_DEV_PIXELS_PER_PX := 1.5
+
+# for Gecko to use the correct boot animation
+# Valid options are: hvga | fwvga | qHD | 720p | 1080p
+BOOTANIMATION_ASSET_SIZE := fwvga
+
+# for Gecko to support separate internal storage partition
+# This is for legacy devices only. You must prvide your own volume.cfg file
+GECKO_BOARD_SEPARATE_STORAGE_PARTITON := true
+
+# for Gecko to support usb mass storage
+# You may need to add mass_storage to init.oem.usb.rc
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+#-    persist.sys.usb.config=mtp
+#    persist.sys.usb.config=mass_storage
+
+# Extra mk import at the bottom of BoardConfig.mk
+include vendor/cm/BoardConfig.mk

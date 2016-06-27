@@ -14,10 +14,13 @@
 # limitations under the License.
 #
 
+# Extra mk import at the top of device.mk
+$(call inherit-product, vendor/cm/config/common_full.mk
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Include sprd-common related aspects
-$(call inherit-product, device/samsung/sprd-common/device.mk)
+#$(call inherit-product, device/samsung/sprd-common/device.mk)
 
 ## (2) Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/mint2g/mint2g-vendor.mk)

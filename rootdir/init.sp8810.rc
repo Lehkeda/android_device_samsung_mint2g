@@ -475,6 +475,10 @@ on property:init.svc.macloader=stopped
     chmod 0660 /data/.rev
 # end of wifi
 
+# Changes in init.device.rc 
+#For FireFox_OS
+on property:sys.boot_completed=1
+
 
 service slog /system/bin/slog
     class main
