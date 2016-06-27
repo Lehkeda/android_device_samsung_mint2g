@@ -166,3 +166,6 @@ BOARD_SEPOLICY_DIRS += \
 
 # Host specific
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+
+# init: [HACK]Get boot hardware and revisiom and setprop it 
+#TARGET_NEEDS_PROP_INIT_HACK := true
