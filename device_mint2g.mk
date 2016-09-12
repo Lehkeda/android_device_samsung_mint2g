@@ -122,20 +122,20 @@ PRODUCT_PACKAGES += \
     charger_res_images
 
 # Permissions
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
- 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
- 	frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
+#PRODUCT_COPY_FILES += \
+#	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+#	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+#	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+#	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+#	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+#	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+#	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+# 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+#	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+#	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+#	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+##	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
+# 	frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -194,19 +194,20 @@ TARGET_SCREEN_WIDTH := 240
 
 
 # Prebuilt APPs
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/apps/app/Music/Music.apk:system/app/Music/Music.apk \
-    $(LOCAL_PATH)/apps/app/OpenCamera/OpenCamera.apk:/system/app/OpenCamera/OpenCamera.apk \
-    $(LOCAL_PATH)/apps/priv-app/Launcher3/Launcher3.apk:system/priv-app/Launcher3/Launcher3.apk 
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/apps/app/Music/Music.apk:system/app/Music/Music.apk \
+#    $(LOCAL_PATH)/apps/app/OpenCamera/OpenCamera.apk:/system/app/OpenCamera/OpenCamera.apk \
+#    $(LOCAL_PATH)/apps/priv-app/Launcher3/Launcher3.apk:system/priv-app/Launcher3/Launcher3.apk \
+#    $(LOCAL_PATH)/apps/app/SimpleExplorer/SimpleExplorer.apk:system/app/SimpleExplorer/SimpleExplorer.apk 
 
 # ART device props
-PRODUCT_PROPERTY_OVERRIDES += \
-	dalvik.vm.dex2oat-Xms=8m \
-	dalvik.vm.dex2oat-Xmx=96m \
-	dalvik.vm.dex2oat-flags=--no-watch-dog \
-	dalvik.vm.dex2oat-filter=interpret-only \
-	dalvik.vm.image-dex2oat-Xms=48m \
-	dalvik.vm.image-dex2oat-Xmx=48m \
-	dalvik.vm.image-dex2oat-filter=speed
+#PRODUCT_PROPERTY_OVERRIDES += \
+#	dalvik.vm.dex2oat-Xms=8m \
+#	dalvik.vm.dex2oat-Xmx=96m \
+#	dalvik.vm.dex2oat-flags=--no-watch-dog \
+#	dalvik.vm.dex2oat-filter=interpret-only \
+#	dalvik.vm.image-dex2oat-Xms=48m \
+#	dalvik.vm.image-dex2oat-Xmx=48m \
+#	dalvik.vm.image-dex2oat-filter=speed
 
 

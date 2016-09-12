@@ -196,3 +196,27 @@ WITH_DEXPREOPT_BOOT_IMG_ONLY := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 USE_MINIKIN := true
+
+
+# LZMA compression for recovery's & kernel ramdisk....
+#TARGET_KERNEL_CONFIG := mini_recovery_mint2g_defconfig
+#TARGET_KERNEL_SOURCE := kernel/samsung/mint2g_lzma
+#BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mint2g/custombootimg.mk
+#BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
+#TARGET_PREBUILT_KERNEL := device/samsung/mint2g/kernel
+
+
+# for Gecko to use the correct resolution assets
+# Valid options are: 1.5 | 2 | 2.25
+GAIA_DEV_PIXELS_PER_PX := 1.5
+
+# for Gecko to use the correct boot animation
+# Valid options are: hvga | fwvga | qHD | 720p | 1080p
+BOOTANIMATION_ASSET_SIZE := hvga
+
+
+
+
+# Extra mk import at the bottom of BoardConfig.mk
+include vendor/cm/BoardConfig.mk
+
