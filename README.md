@@ -7,4 +7,7 @@ Device Tree for Samsung Galaxy Star FireFox OS
 * Device Tree - This repository. Clone this repository in device/samsung/mint.
 * Kernel Source - (https://github.com/TeamButter/android_kernel_samsung_mint). Clone this repository in kernel/samsung/mint.
 * Vendor Blobs - (https://github.com/TeamButter/android_vendor_samsung_mint). Clone this repository in vendor/samsung/mint.
+<<<<<<< HEAD
 
+=======
+>>>>>>> fc78b401612f77a7423b11f9165b9ce7a608840e

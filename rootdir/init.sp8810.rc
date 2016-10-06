@@ -506,4 +506,3 @@ on alarm
     start media
     exec /bin/poweroff_alarm
 
-on property:sys.boot_completed=1

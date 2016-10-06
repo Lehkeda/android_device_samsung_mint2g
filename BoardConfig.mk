@@ -20,6 +20,8 @@
 # definition file).
 #
 
+-include device/samsung/sprd-common/BoardConfigCommon.mk
+
 TARGET_OTA_ASSERT_DEVICE := mint,mint2g,GT-S5282,GT-S5280
 
 # Architecture
@@ -33,17 +35,17 @@ TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HAVE_NEON := true
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+#TARGET_CORTEX_CACHE_LINE_32 := true
+
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := sc8810
 COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
 TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
@@ -75,30 +77,25 @@ TARGET_RECOVERY_FSTAB := device/samsung/mint2g/recovery.fstab
 BOARD_SUPPRESS_EMMC_WIPE := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
-# UMS
-BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/file"
 
 # Graphics
 USE_OPENGL_RENDERER := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
-BOARD_EGL_NEEDS_FNW := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
 MALLOC_IMPL := dlmalloc
 HWUI_COMPILE_FOR_PERF := true
 
 
 # Camera
-USE_CAMERA_STUB := true
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
 CAMERA_SUPPORT_SIZE := 2M
 TARGET_BOARD_NO_FRONT_SENSOR := true
 NEEDS_MEMORYHEAPION := true
 
+
+
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint2g/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/mint2g/bluetooth/libbt_vndcfg.txt
 
@@ -128,6 +125,7 @@ WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
 
 
+
 # Healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
 
@@ -141,6 +139,13 @@ BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril
 
 # Compat
 TARGET_USES_LOGD := false
+
+# Audio
+COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
+
+# RIL
+BOARD_RIL_CLASS += ../../../device/samsung/mint2g/ril/
+
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
@@ -174,10 +179,9 @@ USE_SPRD_HWCOMPOSER := true
 # Media
 BOARD_USE_SAMSUNG_COLORFORMAT := true
 
+
 #twrp
-#TWRP things are need for SLimKat
-#DEVICE_RESOLUTION := 240x320 #Need custom theme at bootable/recovery/gui/devices/
-DEVICE_RESOLUTION := 320x320
+DEVICE_RESOLUTION := 240x240
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 BOARD_HAS_NO_REAL_SDCARD := true
@@ -187,6 +191,7 @@ TW_FLASH_FROM_STORAGE := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
 TWRP_EVENT_LOGGING := false
+
 
 # ART
 WITH_DEXPREOPT := true
@@ -216,6 +221,21 @@ BOOTANIMATION_ASSET_SIZE := hvga
 
 
 
+
+# Extra mk import at the bottom of BoardConfig.mk
+include vendor/cm/BoardConfig.mk
+
+BOOTANIMATION_ASSET_SIZE := fwvga
+
+# for Gecko to support separate internal storage partition
+# This is for legacy devices only. You must prvide your own volume.cfg file
+GECKO_BOARD_SEPARATE_STORAGE_PARTITON := true
+
+# for Gecko to support usb mass storage
+# You may need to add mass_storage to init.oem.usb.rc
+#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+#-    persist.sys.usb.config=mtp
+#    persist.sys.usb.config=mass_storage
 
 # Extra mk import at the bottom of BoardConfig.mk
 include vendor/cm/BoardConfig.mk
