@@ -52,8 +52,11 @@ BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 #TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
-#TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
+#TARGET_KERNEL_CONFIG := b2g_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+#KERNEL_TOOLCHAIN := /home/hesham/B2G/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
+#COMMON_GLOBAL_CFLAGS += --with-android-toolchain=/home/hesham/B2G/ndk/toolchains
 
 
 # Partitions
@@ -199,17 +202,17 @@ WITH_DEXPREOPT_BOOT_IMG_ONLY := true
 #DONT_DEXPREOPT_PREBUILTS := true
 
 # Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-USE_MINIKIN := true
+#EXTENDED_FONT_FOOTPRINT := true
+#USE_MINIKIN := true
 
 
 # LZMA compression for recovery's & kernel ramdisk....
 #TARGET_KERNEL_CONFIG := mini_recovery_mint2g_defconfig
 #TARGET_KERNEL_SOURCE := kernel/samsung/mint2g_lzma
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mint2g/custombootimg.mk
-BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
-TARGET_PREBUILT_KERNEL := device/samsung/mint2g/kernel
-PRODUCT_COPY_FILES += device/samsung/mint2g/kernel:kernel
+#BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mint2g/custombootimg.mk
+#BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
+TARGET_PREBUILT_KERNEL := device/samsung/mint2g/kernel/kernel
+PRODUCT_COPY_FILES += device/samsung/mint2g/kernel/kernel:kernel
 
 # for Gecko to use the correct resolution assets
 # Valid options are: 1.5 | 2 | 2.25
