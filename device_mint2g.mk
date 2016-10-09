@@ -15,7 +15,7 @@
 #
 
 # Extra mk import at the top of device.mk
-$(call inherit-product, vendor/cm/config/common_full.mk
+$(call inherit-product, vendor/cm/config/common_full.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
