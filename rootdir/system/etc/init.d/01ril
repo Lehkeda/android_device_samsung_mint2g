@@ -1,0 +1,7 @@
+# umts_router
+./system/bin/ext_symlink.sh -u
+
+# /dev/pts symlink
+for ((i=1; i<=15; i++)); do
+   ./system/bin/ext_symlink.sh -p
+done

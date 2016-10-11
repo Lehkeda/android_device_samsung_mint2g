@@ -20,6 +20,8 @@
 # definition file).
 #
 
+-include device/samsung/sprd-common/BoardConfigCommon.mk
+
 TARGET_OTA_ASSERT_DEVICE := mint,mint2g,GT-S5282,GT-S5280
 
 # Architecture
@@ -32,31 +34,25 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HAVE_NEON := true
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := sc8810
-COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL -DREFBASE_JB_MR1_COMPAT_SYMBOLS
-TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+BOARD_GLOBAL_CFLAGS += -DSPRD_HARDWARE
+TARGET_INIT_PARSE_PROC_CPUINFO := true
 
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
-TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
+#TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
+#TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
-# FIXME: Replace with path to some other toolchain apart from gcc 4.8
-#KERNEL_TOOLCHAIN := /home/boo/android/toolchains/build/5.2/bin
-KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+#KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
 
 
 # Partitions
@@ -85,31 +81,35 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/file"
 
 # Graphics
-MALLOC_IMPL := dlmalloc
-USE_OPENGL_RENDERER := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
+BOARD_EGL_NEEDS_HANDLE_VALUE := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
 
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-USE_MINIKIN := true
+# Bionic
+BOARD_GLOBAL_CFLAGS += -DUSES_LEGACY_BLOBS
+MALLOC_SVELTE := true
+BOARD_USES_LEGACY_MMAP := true
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
 # Camera
-USE_CAMERA_STUB := true
-COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
+NEEDS_MEMORYHEAPION := true
+CAMERA_SUPPORT_SIZE := 2M
+TARGET_BOARD_NO_FRONT_SENSOR := true
+TARGET_CAMERA_HAS_NO_FLASH := true
+BOARD_NUMBER_OF_CAMERAS := 1
+
+# RIL
+BOARD_RIL_CLASS += ../../../device/samsung/mint2g/ril
+BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint2g/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/mint2g/bluetooth/libbt_vndcfg.txt
 
 # FM Radio
 BOARD_HAVE_FM_RADIO := true
 BOARD_FM_DEVICE := bcm4330
-BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 
 # Connectivity - Wi-Fi
@@ -120,31 +120,18 @@ BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
 WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/wifi/bcmdhd_p2p.bin"
-WIFI_DRIVER_MODULE_NAME          := "dhd"
-WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
 
 
-# Healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
-
 # Audio
-BOARD_USES_TINYALSA_AUDIO := true
-LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
+BOARD_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
 USE_LEGACY_AUDIO_POLICY := 1
-
-# RIL
-BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril
-
-# Compat
-TARGET_USES_LOGD := false
+COMMON_GLOBAL_CFLAGS := -DSPRD_AUDIO
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
@@ -154,18 +141,31 @@ TARGET_SCREEN_WIDTH := 240
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
-# ART host flags
-WITH_DEXPREOPT := true
-
-# CMHW
-BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
+# Healthd
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8810
 
 # SELinux
+SERVICES_WITHOUT_SELINUX_DOMAIN := true
 BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
 # Host specific
-PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+#PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+#ANDROID_COMPILE_WITH_JACK := false
+#USE_NINJA := false
 
-# init: [HACK]Get boot hardware and revisiom and setprop it 
-#TARGET_NEEDS_PROP_INIT_HACK := true
+
+PRODUCT_AAPT_CONFIG := ldpi
+PRODUCT_AAPT_PREF_CONFIG := ldpi
+
+# LZMA compression for recovery's & kernel ramdisk....
+#BOARD_CUSTOM_BOOTIMG_MK := device/samsung/mint2g/custombootimg.mk
+#BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
+TARGET_PREBUILT_KERNEL := device/samsung/mint2g/kernel/kernel
+PRODUCT_COPY_FILES += device/samsung/mint2g/kernel/kernel:kernel
+
+
+# for Gecko to use the correct boot animation
+# Valid options are: hvga | fwvga | qHD | 720p | 1080p
+ENABLE_DEFAULT_BOOTANIMATION := true
+BOOTANIMATION_ASSET_SIZE := hvga
